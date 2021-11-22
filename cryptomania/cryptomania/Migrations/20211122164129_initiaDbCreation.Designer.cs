@@ -9,15 +9,15 @@ using cryptomania.DataAccess;
 namespace cryptomania.Migrations
 {
     [DbContext(typeof(CryptoContext))]
-    [Migration("20211116021657_InitialDbCreation")]
-    partial class InitialDbCreation
+    [Migration("20211122164129_initiaDbCreation")]
+    partial class initiaDbCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("cryptomania.Models.Crypto", b =>
