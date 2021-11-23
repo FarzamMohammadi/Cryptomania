@@ -26,9 +26,13 @@ namespace cryptomania.Controllers
             _context = context;
             
             List<Crypto> currenciesToAdd = GetCrpytoInfo(currencyList);
-            foreach (Crypto currencyToAdd in currenciesToAdd)
+            // If list is null then there was an error retireving the data, thus it does nothing, instead of breaking the code
+            if (currenciesToAdd != null)
             {
-                PostCrypto(currencyToAdd).Wait();
+                foreach (Crypto currencyToAdd in currenciesToAdd)
+                {
+                    PostCrypto(currencyToAdd).Wait();
+                }
             }
         }
 
@@ -152,18 +156,19 @@ namespace cryptomania.Controllers
                 char[] splitterChars = { ',', '{', '"', 'i', 'd', '"', ':', };
                 string splitter = new string(splitterChars);
                 // Parse the response body.
-                JArray stuff = (JArray)JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result);
-                for (int i = 0; i < stuff.Count; i++)
+                JArray apiCallResults = (JArray)JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result);
+                // Goes throguh all the crtytos from the call based on count
+                for (int i = 0; i < apiCallResults.Count; i++)
                 {
                     Crypto currencyToReturn = new Crypto();
-                    dynamic data = JObject.Parse(stuff[i].ToString());
+                    dynamic data = JObject.Parse(apiCallResults[i].ToString());
                     List<JProperty> dataProperties = new List<JProperty>();
-                    List<JProperty> oneDayAnalysis = new List<JProperty>();
+                    // Sepeartes items to add to list (in a way parses results so it can be accessed/mutated later)
                     foreach (var property in data)
                     {
                         dataProperties.Add(property);
                     }
-
+                    // Sets all crypto properties to be added/update the database
                     foreach(JProperty property in dataProperties)
                     {
                         switch (property.Name)
@@ -184,7 +189,8 @@ namespace cryptomania.Controllers
                                 currencyToReturn.MarketCap = property.Value.ToString();
                                 break;
                             case "1d":
-                                foreach(var item in property)
+                                // Sepeartes items to add to list(in a way parses results so it can be accessed / mutated later)
+                                foreach (var item in property)
                                 {
                                     foreach(JProperty oneDayProp in item)
                                     {
