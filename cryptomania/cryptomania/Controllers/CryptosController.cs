@@ -10,6 +10,7 @@ using cryptomania.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace cryptomania.Controllers
 {
@@ -21,28 +22,16 @@ namespace cryptomania.Controllers
 
         public CryptosController(CryptoContext context)
         {
+            string currencyList = "BTC,ETH,BNB,LUNA,SOL,ADA,CRP,DOT,DOGE,AVAX";
             _context = context;
-            AddCryptoToDB();
-         
-        }
-
-        public void AddCryptoToDB()
-        {
-           /* string[] currencyList = { "BTC", "ETH", "BNB", "LUNA", "SOL", "ADA", "CRP", "DOT", "DOGE", "AVAX" };
-            foreach (string currency in currencyList)
+            
+            List<Crypto> currenciesToAdd = GetCrpytoInfo(currencyList);
+            foreach (Crypto currencyToAdd in currenciesToAdd)
             {
-                Crypto currencyToAdd = GetCrpytoInfo(currency);
-                if (currencyToAdd != null)
-                {
-                    bool operationComplete = PostCrypto(currencyToAdd).IsCompleted;
-                    while (!operationComplete)
-                    {
-                        System.Threading.Thread.Sleep(1000);
-
-                    }
-                }
-            }*/
+                PostCrypto(currencyToAdd).Wait();
+            }
         }
+
         // GET: api/Cryptos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Crypto>>> GetCryptos()
@@ -112,7 +101,7 @@ namespace cryptomania.Controllers
                 if (CryptoExists(crypto.Id))
                 {
                     await PutCrypto(crypto.Id, crypto);
-                    return Conflict();
+                    return NoContent();
                 }
                 else
                 {
@@ -144,12 +133,11 @@ namespace cryptomania.Controllers
             return _context.Cryptos.Any(e => e.Id == id);
         }
 
-        public Crypto GetCrpytoInfo(string currencytId)
+        public List<Crypto> GetCrpytoInfo(string currencytId)
         {
-            Crypto currencyToReturn = new Crypto();
+            List<Crypto> currenciesToReturn = new List<Crypto>();
             string url = "https://api.nomics.com/v1/currencies/ticker";
-            string urlParameter = "?key=f93bfb1a0c1f0bc759f2a4f51566b66fe594929b&ids>=" + currencytId + "&interval=1d&per-page=100&page=1&";
-
+            string urlParameter = "?key=f93bfb1a0c1f0bc759f2a4f51566b66fe594929b&ids=" + currencytId + "&interval=1d&convert=USD&per-page=100&page=1";
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(url);
 
@@ -157,49 +145,70 @@ namespace cryptomania.Controllers
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            // List data response.
+            // List data response.          
             HttpResponseMessage response = client.GetAsync(urlParameter).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
+                char[] splitterChars = { ',', '{', '"', 'i', 'd', '"', ':', };
+                string splitter = new string(splitterChars);
                 // Parse the response body.
-                string dataObjects = response.Content.ReadAsStringAsync().Result;
-                JArray jsonArray = JArray.Parse(dataObjects);
-                dynamic data = JObject.Parse(jsonArray[0].ToString());
-                List<JProperty> dataProperties = new List<JProperty>();
-                List<JProperty> oneDayAnalysis = new List<JProperty>();
-                foreach (var property in data)
+                JArray stuff = (JArray)JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result);
+                for (int i = 0; i < stuff.Count; i++)
                 {
-                    dataProperties.Add(property);
-                }
-                dynamic oneDay = null;
-                if (dataProperties.Count == 24)
-                {
-                    currencyToReturn.Id = dataProperties[0].Value.ToString();
-                    currencyToReturn.Name = dataProperties[3].Value.ToString();
-                    currencyToReturn.LogoUrl = dataProperties[4].Value.ToString();
-                    currencyToReturn.Price = dataProperties[6].Value.ToString();
-                    currencyToReturn.MarketCap = dataProperties[11].Value.ToString();
-                    oneDay = dataProperties[23];
-
-                    foreach (var item in oneDay)
+                    Crypto currencyToReturn = new Crypto();
+                    dynamic data = JObject.Parse(stuff[i].ToString());
+                    List<JProperty> dataProperties = new List<JProperty>();
+                    List<JProperty> oneDayAnalysis = new List<JProperty>();
+                    foreach (var property in data)
                     {
-                        foreach (JProperty value in item)
+                        dataProperties.Add(property);
+                    }
+
+                    foreach(JProperty property in dataProperties)
+                    {
+                        switch (property.Name)
                         {
-                            oneDayAnalysis.Add(value);
+                            case "id":
+                                currencyToReturn.Id = property.Value.ToString();
+                                break;
+                            case "logo_url":
+                                currencyToReturn.LogoUrl = property.Value.ToString();
+                                break;
+                            case "name":
+                                currencyToReturn.Name = property.Value.ToString();
+                                break;
+                            case "price":
+                                currencyToReturn.Price = property.Value.ToString();
+                                break;
+                            case "market_cap":
+                                currencyToReturn.MarketCap = property.Value.ToString();
+                                break;
+                            case "1d":
+                                foreach(var item in property)
+                                {
+                                    foreach(JProperty oneDayProp in item)
+                                    {
+                                        if (oneDayProp.Name == "price_change_pct")
+                                        {
+                                            currencyToReturn.PriceChangePct = oneDayProp.Value.ToString();
+                                        }
+                                    }    
+                                }
+                                break;
                         }
                     }
-                    currencyToReturn.PriceChangePct = oneDayAnalysis[2].Value.ToString();
-                    return currencyToReturn;
+                    currenciesToReturn.Add(currencyToReturn);
                 }
             }
             else
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                client.Dispose();
                 return null;
             }
             // Dispose once all HttpClient calls are complete.
             client.Dispose();
-            return null;
+            return currenciesToReturn;
 
         }
     }
