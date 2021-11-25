@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cryptomaniaUI.Commands;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -22,5 +23,15 @@ namespace cryptomaniaUI.Views
         {
             InitializeComponent();
         }
+        private void SignUp_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.Notify("GoToSignUpView", "");
+        }
+
+        private void Main_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.Notify("GoToHomeView", "");
+        }
+
     }
 }
