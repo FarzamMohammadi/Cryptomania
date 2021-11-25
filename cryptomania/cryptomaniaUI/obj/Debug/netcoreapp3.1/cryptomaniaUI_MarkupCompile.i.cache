@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\App.xaml
-4247431306
+7-1856725541
 
-19-1603242320
+26-1009094461
 192-1533232326
-MainWindow.xaml;Views\HomeView.xaml;Views\LoginView.xaml;Views\SignUpView.xaml;
+MainWindow.xaml;Views\CartView.xaml;Views\CryptoView.xaml;Views\HomeView.xaml;Views\LoginView.xaml;Views\ProfileView.xaml;Views\SignUpView.xaml;
 
 True
 

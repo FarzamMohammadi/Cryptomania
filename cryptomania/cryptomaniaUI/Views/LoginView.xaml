@@ -14,7 +14,7 @@
         <PasswordBox x:Name="rePassTBox" HorizontalAlignment="Left" Margin="249,122,0,0" VerticalAlignment="Top" Width="401" FontSize="14"/>
         <Button Content="Sign Up" HorizontalAlignment="Left" Margin="80,316,0,0" VerticalAlignment="Top" Click="SignUp_btn_Click" Height="42" Width="140"/>
         <Button Content="Back To Main" HorizontalAlignment="Left" Margin="510,317,0,0" VerticalAlignment="Top" Click="Main_btn_Click" Height="41" Width="140"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="510,184,0,0" VerticalAlignment="Top"  Height="41" Width="140"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="510,184,0,0" VerticalAlignment="Top"  Height="41" Width="140" Click="Login_btn_Click"/>
 
     </Grid>
 </UserControl>

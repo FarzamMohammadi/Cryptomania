@@ -1,4 +1,5 @@
 ﻿using cryptomaniaUI.Commands;
+using cryptomaniaUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,5 +34,13 @@ namespace cryptomaniaUI.Views
             Mediator.Notify("GoToHomeView", "");
         }
 
+        private void Login_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Check user creds
+            // If matches db record switch to profile view
+            SignedInModel.LoggedIn = true;
+            Mediator.Notify("GoToProfileView", "");
+            // Else show error msg and ask for proper creds
+        }
     }
 }

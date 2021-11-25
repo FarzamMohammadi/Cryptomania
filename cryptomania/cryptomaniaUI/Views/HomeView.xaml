@@ -9,5 +9,7 @@
     <Grid Background="White">
         <Button Content="Sign Up" HorizontalAlignment="Left" Margin="576,296,0,0" VerticalAlignment="Top" Click="SignUp_btn_Click"/>
         <Button Content="Log in" HorizontalAlignment="Left" Margin="157,301,0,0" VerticalAlignment="Top" Click="Login_btn_Click"/>
+        <Label Content="Welcome To Cryptomania" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top" FontSize="20" FontStyle="Italic"/>
+        <Label Content="Please Sign In." HorizontalAlignment="Left" Margin="58,79,0,0" VerticalAlignment="Top" FontSize="20" FontStyle="Italic"/>
     </Grid>
 </UserControl>

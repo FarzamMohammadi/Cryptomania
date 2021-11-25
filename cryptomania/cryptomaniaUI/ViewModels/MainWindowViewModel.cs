@@ -55,6 +55,19 @@ namespace cryptomaniaUI.ViewModels
         {
             ChangeViewModel(PageViewModels[1]);
         }
+        private void OnGo2ProfileScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[3]);
+        }
+
+        private void OnGo2CartScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[4]);
+        }
+        private void OnGo2CryptoScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[5]);
+        }
 
         public MainWindowViewModel()
         {
@@ -62,12 +75,19 @@ namespace cryptomaniaUI.ViewModels
             PageViewModels.Add(new HomeViewModel());
             PageViewModels.Add(new LoginViewModel());
             PageViewModels.Add(new SignUpViewModel());
+            PageViewModels.Add(new ProfileViewModel());
+            PageViewModels.Add(new CartViewModel());
+            PageViewModels.Add(new CryptoViewModel());
 
+            // Starting page
             CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe("GoToHomeView", OnGo2MainScreen);
             Mediator.Subscribe("GoToLoginView", OnGo2LoginScreen);
             Mediator.Subscribe("GoToSignUpView", OnGo2SignUpScreen);
+            Mediator.Subscribe("GoToProfileView", OnGo2ProfileScreen);
+            Mediator.Subscribe("GoToCartView", OnGo2CartScreen);
+            Mediator.Subscribe("GoToCryptoView", OnGo2CryptoScreen);
         }
     }
 }
