@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\farza\\Desktop\\Projects\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj": {}
+    "C:\\Users\\curti\\Documents\\GitHub\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj": {}
   },
   "projects": {
-    "C:\\Users\\farza\\Desktop\\Projects\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj": {
+    "C:\\Users\\curti\\Documents\\GitHub\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\farza\\Desktop\\Projects\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj",
+        "projectUniqueName": "C:\\Users\\curti\\Documents\\GitHub\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj",
         "projectName": "cryptomania",
-        "projectPath": "C:\\Users\\farza\\Desktop\\Projects\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj",
-        "packagesPath": "C:\\Users\\farza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\farza\\Desktop\\Projects\\cryptomania\\cryptomania\\cryptomania\\obj\\",
+        "projectPath": "C:\\Users\\curti\\Documents\\GitHub\\cryptomania\\cryptomania\\cryptomania\\cryptomania.csproj",
+        "packagesPath": "C:\\Users\\curti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\curti\\Documents\\GitHub\\cryptomania\\cryptomania\\cryptomania\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\farza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\curti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -73,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
