@@ -64,6 +64,8 @@ namespace cryptomaniaUI.Views
         private void Clear_btn_Click(object sender, RoutedEventArgs e)
         {
             // Clear crypto2SendAmountTBox and receiverWalletAddressTBox 
+            crypto2SendAmountTBox.Text = String.Empty;
+            receiverWalletAddressTBox.Text = String.Empty;
         }
     }
 }

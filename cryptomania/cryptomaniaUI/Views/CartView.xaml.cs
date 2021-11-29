@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cryptomaniaUI.Commands;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,11 @@ namespace cryptomaniaUI.Views
         public CartView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.Notify("GoToHomeView", "");
         }
     }
 }

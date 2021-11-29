@@ -26,3 +26,9 @@ C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\cryptomaniaUI.pdb
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\cryptomaniaUI.genruntimeconfig.cache
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\cryptomaniaUI.csproj.AssemblyReference.cache
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\Views\CartView.g.cs
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\Views\CryptoView.g.cs
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\Views\ProfileView.g.cs
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\Views\CartView.baml
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\Views\CryptoView.baml
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\Views\ProfileView.baml

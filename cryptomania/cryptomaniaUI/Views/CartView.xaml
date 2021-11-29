@@ -13,6 +13,7 @@
         <Button Content="-" HorizontalAlignment="Left" Margin="582,96,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
         <Button Content="Clear Cart" HorizontalAlignment="Left" Margin="456,146,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
         <Label Content="To modify first select the currency on the grid." HorizontalAlignment="Left" Margin="456,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.446,0.99"/>
+        <Button Content="Back to main " HorizontalAlignment="Left" Margin="456,331,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="Button_Click"/>
 
     </Grid>
 </UserControl>

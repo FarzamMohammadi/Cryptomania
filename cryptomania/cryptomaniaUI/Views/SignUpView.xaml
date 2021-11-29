@@ -18,11 +18,11 @@
         <TextBox x:Name="FNameTBox" HorizontalAlignment="Left" Margin="249,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399" FontSize="14"/>
         <TextBox x:Name="LNameTBox" HorizontalAlignment="Left" Margin="249,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399" FontSize="14"/>
         <TextBox x:Name="emailTBox" HorizontalAlignment="Left" Margin="249,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="399" FontSize="14"/>
-        <Button Content="CLEAR" HorizontalAlignment="Left" Margin="249,264,0,0" VerticalAlignment="Top" Height="32" Width="78"/>
+        <Button x:Name="btnClear" Content="CLEAR" HorizontalAlignment="Left" Margin="249,264,0,0" VerticalAlignment="Top" Height="32" Width="78" Click="btnClear_Click"/>
         <Button Content="Back To Main" HorizontalAlignment="Left" Margin="539,356,0,0" VerticalAlignment="Top" Click="Main_btn_Click" Height="41" Width="140"/>
         <PasswordBox x:Name="rePassTBox" HorizontalAlignment="Left" Margin="249,224,0,0" VerticalAlignment="Top" Width="399" FontSize="14"/>
         <PasswordBox x:Name="passTBox" HorizontalAlignment="Left" Margin="249,190,0,0" VerticalAlignment="Top" Width="399" FontSize="14"/>
-        <Button Content="Register" HorizontalAlignment="Left" Margin="570,259,0,0" VerticalAlignment="Top" Height="32" Width="78"/>
+        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="570,259,0,0" VerticalAlignment="Top" Height="32" Width="78" Click="btnRegister_Click"/>
 
     </Grid>
 </UserControl>

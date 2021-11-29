@@ -32,5 +32,23 @@ namespace cryptomaniaUI.Views
         {
             Mediator.Notify("GoToHomeView", "");
         }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            //clear text fields
+            //passTBox, repassTBox, FNameTBox, LNameTBox, emailTBox
+            FNameTBox.Text = String.Empty;
+            LNameTBox.Text = String.Empty;
+            emailTBox.Text = String.Empty;
+            passTBox.Clear();
+            rePassTBox.Clear();
+            
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            //add and add user to the database
+
+        }
     }
 }

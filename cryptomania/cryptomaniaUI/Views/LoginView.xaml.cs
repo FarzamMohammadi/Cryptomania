@@ -41,6 +41,7 @@ namespace cryptomaniaUI.Views
             SignedInModel.LoggedIn = true;
             Mediator.Notify("GoToProfileView", "");
             // Else show error msg and ask for proper creds
+
         }
     }
 }
