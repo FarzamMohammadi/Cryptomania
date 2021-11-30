@@ -23,6 +23,34 @@ namespace cryptomaniaUI.Views
         public ProfileView()
         {
             InitializeComponent();
+            // Sets username in UI
+            usernameLbl.Content = SignedInModel.Username;
+            // Checks for wallet, if it exists updates UI
+            CheckWallet();
+
+        }
+
+        private void CheckWallet()
+        {
+            WalletModel wallet = SignedInModel.CheckForUserWallet();
+            List<PurchasedCrypto> purchasedCrypto = new List<PurchasedCrypto>();
+            PurchasedCrypto pruchase = null;
+            if (wallet != null)
+            {
+                walletAddyLbl.Content = wallet.WalletAddress;
+                string[] purchases = wallet.Purchases.Split('/');
+
+                foreach(string purcahse in purchases)
+                {
+                    int length = purcahse.Length;
+                    string cryptoName = purcahse.Substring(0, 3);
+                    string cryptoQuantity = purcahse.Substring(4, length);
+                    // A cool one liner below ;)
+                    purchasedCrypto.Add(pruchase = new PurchasedCrypto() { Name = cryptoName, Quantity = cryptoQuantity });
+                }
+
+                // Add each purchase to datagrid
+            }
         }
 
         private void Main_btn_Click(object sender, RoutedEventArgs e)
@@ -57,8 +85,7 @@ namespace cryptomaniaUI.Views
 
         private void NewWallet_btn_Click(object sender, RoutedEventArgs e)
         {
-            // Create new wallet address and update database record 
-            // Change walletAddyLbl to new address 
+            
         }
 
         private void Clear_btn_Click(object sender, RoutedEventArgs e)

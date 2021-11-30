@@ -86,7 +86,7 @@ namespace cryptomania.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Purhcases")
+                    b.Property<string>("Purchases")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

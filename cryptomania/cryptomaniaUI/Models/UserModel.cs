@@ -21,7 +21,7 @@ namespace cryptomaniaUI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public static async void AddUserAsync(UserModel newUser)
+        public static async Task<bool> AddUserAsync(UserModel newUser)
         {
             try
             {
@@ -34,17 +34,18 @@ namespace cryptomaniaUI.Models
                 string result = response.Content.ReadAsStringAsync().Result;
 
                 // If already exits or any other false code the return the msg below
-                if(response.IsSuccessStatusCode == false)
+                if(response.ReasonPhrase == "Conflict")
                 {
-                    MessageBox.Show("User was not saved. Please try again");
+                    MessageBox.Show("User Exists");
                 }
-
+                    MessageBox.Show("User Created.");
+                    return true;
             }
             catch
             {
                 MessageBox.Show("User was not saved. Please try again");
+                return false;
             }
-
         }
 
         public static bool CheckUserCredentials(UserModel loggingInUser)
@@ -72,7 +73,6 @@ namespace cryptomaniaUI.Models
             }
             catch
             {
-                MessageBox.Show("User was not saved. Please try again");
                 return false;
             }
             return false;

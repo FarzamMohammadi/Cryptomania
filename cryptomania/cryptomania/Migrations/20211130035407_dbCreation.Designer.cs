@@ -9,7 +9,7 @@ using cryptomania.DataAccess;
 namespace cryptomania.Migrations
 {
     [DbContext(typeof(CryptoContext))]
-    [Migration("20211123031545_dbCreation")]
+    [Migration("20211130035407_dbCreation")]
     partial class dbCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,7 +88,7 @@ namespace cryptomania.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Purhcases")
+                    b.Property<string>("Purchases")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

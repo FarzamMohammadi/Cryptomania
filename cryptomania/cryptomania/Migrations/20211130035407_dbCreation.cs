@@ -57,7 +57,7 @@ namespace cryptomania.Migrations
                     Id = table.Column<string>(nullable: false),
                     WalletAddress = table.Column<string>(nullable: true),
                     Username = table.Column<string>(nullable: true),
-                    Purhcases = table.Column<string>(nullable: true)
+                    Purchases = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

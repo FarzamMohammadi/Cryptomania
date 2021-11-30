@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace cryptomania.Models
+namespace cryptomaniaUI.Models
 {
-    public class Wallet
+    class WalletModel
     {
         public string Id { get; set; }
         public string WalletAddress { get; set; }

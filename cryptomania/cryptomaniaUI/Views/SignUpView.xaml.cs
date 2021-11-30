@@ -38,32 +38,37 @@ namespace cryptomaniaUI.Views
 
         private void Clear_btn_Click(object sender, RoutedEventArgs e)
         {
+            ClearAll();
+        }
+
+        public void ClearAll()
+        {
             FNameTBox.Text = "";
             LNameTBox.Text = "";
             emailTBox.Text = "";
             passTBox.Clear();
             rePassTBox.Clear();
-            
         }
 
-        private void Register_btn_Click(object sender, RoutedEventArgs e)
+        private async void Register_btn_Click(object sender, RoutedEventArgs e)
         {
             string fName = FNameTBox.Text;
             string lName = LNameTBox.Text;
             string email = emailTBox.Text;
             string password = passTBox.Password;
-            string passwordRe = passTBox.Password;
+            string passwordRe = rePassTBox.Password;
 
             if (fName != "" && lName != "" && email != "" && password != null & passwordRe != null)
             {
                 if (password == passwordRe)
                 {
                     UserModel newUser = new UserModel { FirstName = fName, LastName = lName, Username = email, Password = password };
-                    UserModel.AddUserAsync(newUser);
+                    await UserModel.AddUserAsync(newUser);
+                    ClearAll();
                 }
                 else
                 {
-                    MessageBox.Show("Please fill out the fields.");
+                    MessageBox.Show("Passwords don't match.");
                 }
             }
             else

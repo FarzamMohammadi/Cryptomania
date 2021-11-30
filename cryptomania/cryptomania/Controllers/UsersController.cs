@@ -45,7 +45,7 @@ namespace cryptomania.Controllers
         [HttpGet("{username}")]
         public ActionResult<User> GetUserByUsername(string username)
         {
-            var user =  _context.Users
+            User user =  _context.Users
                     .Where(b => b.Username == username)
                     .FirstOrDefault();
 
@@ -148,9 +148,9 @@ namespace cryptomania.Controllers
 
         private string GetTableCount()
         {
-            int count = _context.Users.Count(t => t.Id == "1") + 1;
+            int count = _context.Users.Select(x => x.Id).Count();
             
-            return count.ToString();
+            return (count+1).ToString();
         }
     }
 }

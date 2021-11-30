@@ -27,12 +27,28 @@ namespace cryptomania.Controllers
         {
             return await _context.Wallets.ToListAsync();
         }
-
+/*
         // GET: api/Wallets/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Wallet>> GetWallet(string id)
         {
             var wallet = await _context.Wallets.FindAsync(id);
+
+            if (wallet == null)
+            {
+                return NotFound();
+            }
+
+            return wallet;
+        }*/
+
+        // GET: api/Wallets/5
+        [HttpGet("{id}")]
+        public ActionResult<Wallet> GetWallet(string username)
+        {
+            Wallet wallet = _context.Wallets
+                    .Where(b => b.Username == username)
+                    .FirstOrDefault();
 
             if (wallet == null)
             {
