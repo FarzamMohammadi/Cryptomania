@@ -46,15 +46,15 @@ namespace cryptomaniaUI.ViewModels
         {
             ChangeViewModel(PageViewModels[0]);
         }
-
-        private void OnGo2SignUpScreen(object obj)
-        {
-            ChangeViewModel(PageViewModels[2]);
-        }
         private void OnGo2LoginScreen(object obj)
         {
             ChangeViewModel(PageViewModels[1]);
         }
+        private void OnGo2SignUpScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[2]);
+        }
+
         private void OnGo2ProfileScreen(object obj)
         {
             ChangeViewModel(PageViewModels[3]);

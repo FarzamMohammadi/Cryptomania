@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http;
+using cryptomaniaUI.Models;
 
 namespace cryptomaniaUI.Views
 {
@@ -19,6 +21,7 @@ namespace cryptomaniaUI.Views
     /// </summary>
     public partial class SignUpView : UserControl
     {
+        private static readonly HttpClient client = new HttpClient();
         public SignUpView()
         {
             InitializeComponent();
@@ -33,21 +36,40 @@ namespace cryptomaniaUI.Views
             Mediator.Notify("GoToHomeView", "");
         }
 
-        private void btnClear_Click(object sender, RoutedEventArgs e)
+        private void Clear_btn_Click(object sender, RoutedEventArgs e)
         {
-            //clear text fields
-            //passTBox, repassTBox, FNameTBox, LNameTBox, emailTBox
-            FNameTBox.Text = String.Empty;
-            LNameTBox.Text = String.Empty;
-            emailTBox.Text = String.Empty;
+            FNameTBox.Text = "";
+            LNameTBox.Text = "";
+            emailTBox.Text = "";
             passTBox.Clear();
             rePassTBox.Clear();
             
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void Register_btn_Click(object sender, RoutedEventArgs e)
         {
-            //add and add user to the database
+            string fName = FNameTBox.Text;
+            string lName = LNameTBox.Text;
+            string email = emailTBox.Text;
+            string password = passTBox.Password;
+            string passwordRe = passTBox.Password;
+
+            if (fName != "" && lName != "" && email != "" && password != null & passwordRe != null)
+            {
+                if (password == passwordRe)
+                {
+                    UserModel newUser = new UserModel { FirstName = fName, LastName = lName, Username = email, Password = password };
+                    UserModel.AddUserAsync(newUser);
+                }
+                else
+                {
+                    MessageBox.Show("Please fill out the fields.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please fill out the fields.");
+            }
 
         }
     }

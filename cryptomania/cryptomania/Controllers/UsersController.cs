@@ -28,11 +28,26 @@ namespace cryptomania.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        /*        // GET: api/Users/5
+                [HttpGet("{id}")]
+                public async Task<ActionResult<User>> GetUser(string id)
+                {
+                    var user = await _context.Users.FindAsync(id);
+
+                    if (user == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return user;
+                }*/
+
+        [HttpGet("{username}")]
+        public ActionResult<User> GetUserByUsername(string username)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user =  _context.Users
+                    .Where(b => b.Username == username)
+                    .FirstOrDefault();
 
             if (user == null)
             {
@@ -80,22 +95,32 @@ namespace cryptomania.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            string num = GetTableCount();
+            user.Id = num;
             _context.Users.Add(user);
-            try
+            if (!UserExists(user.Username))
             {
-                await _context.SaveChangesAsync();
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    if (UserExists(user.Username))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
-            catch (DbUpdateException)
+            else
             {
-                if (UserExists(user.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return Conflict();
             }
+           
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
@@ -116,9 +141,16 @@ namespace cryptomania.Controllers
             return user;
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(string username)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Username == username);
+        }
+
+        private string GetTableCount()
+        {
+            int count = _context.Users.Count(t => t.Id == "1") + 1;
+            
+            return count.ToString();
         }
     }
 }

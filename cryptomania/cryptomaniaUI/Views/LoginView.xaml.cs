@@ -36,11 +36,19 @@ namespace cryptomaniaUI.Views
 
         private void Login_btn_Click(object sender, RoutedEventArgs e)
         {
-            // Check user creds
-            // If matches db record switch to profile view
-            SignedInModel.LoggedIn = true;
-            Mediator.Notify("GoToProfileView", "");
-            // Else show error msg and ask for proper creds
+            UserModel loggingInUser = new UserModel();
+            loggingInUser.Username = usernameTbox.Text;
+            loggingInUser.Password = passTbox.Password;
+
+            if (UserModel.CheckUserCredentials(loggingInUser))
+            {
+                SignedInModel.LoggedIn = true;
+                SignedInModel.Username = loggingInUser.Username;
+                Mediator.Notify("GoToProfileView", "");
+            }
+            else {
+                MessageBox.Show("Login Unsuccessful. Please try again.");
+            }
 
         }
     }

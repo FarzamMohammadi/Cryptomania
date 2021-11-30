@@ -15,5 +15,14 @@
         <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
             <views:LoginView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ProfileViewModel}">
+            <views:ProfileView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CartViewModel}">
+            <views:CartView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:CryptoViewModel}">
+            <views:CryptoView />
+        </DataTemplate>
     </Application.Resources>
 </Application>
