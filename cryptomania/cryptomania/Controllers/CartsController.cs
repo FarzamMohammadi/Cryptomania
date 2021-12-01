@@ -80,16 +80,23 @@ namespace cryptomania.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Cart>> PostCart(Cart cart)
+        public async Task<ActionResult<Cart>> PostCart(Cart passedCart)
         {
-            _context.Carts.Add(cart);
+            Cart cart = GetWalletByUsername(passedCart.Username);
+
+            if (cart == null)
+            {
+                int tableRecords = GetTableCount();
+                passedCart.Id = (tableRecords + 1).ToString();
+                _context.Carts.Add(passedCart);
+            }
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CartExists(cart.Id))
+                if (CartExists(passedCart.Id))
                 {
                     return Conflict();
                 }
@@ -99,7 +106,7 @@ namespace cryptomania.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCart", new { id = cart.Id }, cart);
+            return CreatedAtAction("GetCart", new { id = passedCart.Id }, passedCart);
         }
 
         // DELETE: api/Carts/5
@@ -121,6 +128,21 @@ namespace cryptomania.Controllers
         private bool CartExists(string id)
         {
             return _context.Carts.Any(e => e.Id == id);
+        }
+
+        private int GetTableCount()
+        {
+            int count = _context.Carts.Select(x => x.Id).Count();
+
+            return count;
+        }
+
+        private Cart GetWalletByUsername(string Username)
+        {
+            Cart cart = _context.Carts
+                   .Where(b => b.Username == Username)
+                   .FirstOrDefault();
+            return cart;
         }
     }
 }

@@ -59,13 +59,14 @@ namespace cryptomaniaUI.Models
                 // If already exits or any other false code the return the msg below
                 if (response.ReasonPhrase == "Conflict")
                 {
+                    CheckCart();
                     return false;
                 }
-                CheckCart();
                 return true;
             }
             catch
             {
+                CheckCart();
                 MessageBox.Show("Issue creating cart.");
                 return false;
             }

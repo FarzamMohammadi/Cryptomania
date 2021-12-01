@@ -22,8 +22,13 @@ namespace cryptomania.Controllers
 
         public CryptosController(CryptoContext context)
         {
+            // Set context and array of currency to retrieve
             string currencyList = "BTC,ETH,BNB,LUNA,SOL,ADA,CRP,DOT,DOGE,AVAX";
             _context = context;
+
+            //If table records exist delete them so it can be updated
+            if (GetTableCount() >= 0) { DeleteAllCryptos().Wait(); }
+            
             
             List<Crypto> currenciesToAdd = GetCrpytoInfo(currencyList);
             // If list is null then there was an error retireving the data, thus it does nothing, instead of breaking the code
@@ -216,6 +221,33 @@ namespace cryptomania.Controllers
             client.Dispose();
             return currenciesToReturn;
 
+        }
+
+        private int GetTableCount()
+        {
+            int count = _context.Cryptos.Select(x => x.Id).Count();
+
+            return count;
+        }
+        private string[] GetTableIds()
+        {
+            // Great query for future project reference
+            string[] ids = _context.Cryptos.AsEnumerable().Select(row => row.Id.ToString()).ToArray();
+
+            return ids;
+        }
+
+
+        // DELETE: api/Cryptos/deleteall
+        [HttpDelete("deleteall")]
+        private async Task<bool> DeleteAllCryptos()
+        {
+            string[] ids = GetTableIds();
+            foreach(string id in ids)
+            {
+                 await DeleteCrypto(id.ToString());
+            }
+            return true;
         }
     }
 }

@@ -103,11 +103,11 @@ namespace cryptomania.Controllers
         {
             Wallet wallet = GetWalletByUsername(passedWallet.Username);
 
-            if (wallet.Id == null)
+            if (wallet == null)
             {
                 int tableRecords = GetTableCount();
-                wallet.Id = (tableRecords + 1).ToString();
-                _context.Wallets.Add(wallet);
+                passedWallet.Id = (tableRecords + 1).ToString();
+                _context.Wallets.Add(passedWallet);
             }
             else
             {
@@ -130,7 +130,7 @@ namespace cryptomania.Controllers
                 }
             }
 
-            return CreatedAtAction("GetWallet", new { id = wallet.Id }, wallet);
+            return CreatedAtAction("GetWallet", new { id = passedWallet.Id }, passedWallet);
         }
 
         // DELETE: api/Wallets/5

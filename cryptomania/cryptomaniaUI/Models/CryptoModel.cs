@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
+using System.Net.Http;
+using System.Windows;
 
 namespace cryptomaniaUI.Models
 {
@@ -37,6 +38,21 @@ namespace cryptomaniaUI.Models
             catch
             {
                 return null;
+            }
+        }
+        public static void DeleteAllCryptos()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:5001/");
+                    var response = client.DeleteAsync("api/cryptos/deleteall").Result;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Could not refresh crypto data");
             }
         }
     }
