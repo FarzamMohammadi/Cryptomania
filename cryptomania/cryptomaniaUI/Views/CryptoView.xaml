@@ -21,10 +21,6 @@
         <Button x:Name="MainButton_Copy1" Content="Clear Cart" HorizontalAlignment="Left" Margin="362,80,0,0" VerticalAlignment="Top" Height="37" Width="108" Click="MainButton_Click" Grid.Row="2"/>
         <Label x:Name="cName" Content="name" HorizontalAlignment="Left" Margin="112,73,0,0" VerticalAlignment="Top"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="29" Margin="87,75,0,0" VerticalAlignment="Top" Width="33"/>
-        <Label x:Name="currencyName_Copy" Content="CRYPTOCURRENCY" HorizontalAlignment="Left" Margin="87,46,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="currencyName_Copy1" Content="PRICE" HorizontalAlignment="Left" Margin="262,47,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="currencyName_Copy2" Content="MARKET CAP" HorizontalAlignment="Left" Margin="426,47,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="currencyName_Copy3" Content="24H CHANGE" HorizontalAlignment="Left" Margin="599,47,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="currencyPrice" Content="price" HorizontalAlignment="Left" Margin="267,74,0,0" VerticalAlignment="Top"/>
         <Label x:Name="currencyMCap" Content="mCap" HorizontalAlignment="Left" Margin="451,73,0,0" VerticalAlignment="Top"/>
         <Label x:Name="currencyChange" Content="24hChange" HorizontalAlignment="Left" Margin="611,73,0,0" VerticalAlignment="Top"/>
@@ -95,13 +91,12 @@
         <Label x:Name="currencyChange8" Content="24hChange" HorizontalAlignment="Left" Margin="611,46,0,0" VerticalAlignment="Top" Grid.Row="2"/>
         <Button x:Name="addBtn1" Content="+" HorizontalAlignment="Left" Margin="741,73,0,0" VerticalAlignment="Top" Height="26" Width="30" Click="addBtn1_Click"/>
         <Button x:Name="addBtn2" Content="+" HorizontalAlignment="Left" Margin="741,104,0,0" VerticalAlignment="Top" Height="26" Width="30" Click="addBtn2_Click"/>
-        <Button x:Name="addBtn3" Content="+" HorizontalAlignment="Left" Margin="741,135,0,0" VerticalAlignment="Top" Height="26" Width="30"/>
-        <Button x:Name="addBtn4" Content="+" HorizontalAlignment="Left" Margin="741,167,0,0" VerticalAlignment="Top" Height="26" Width="30"/>
-        <Button x:Name="addBtn5" Content="+" HorizontalAlignment="Left" Margin="741,198,0,0" VerticalAlignment="Top" Height="26" Width="30"/>
-        <Button x:Name="addBtn6" Content="+" HorizontalAlignment="Left" Margin="741,230,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.RowSpan="2"/>
-        <Button x:Name="addBtn7" Content="+" HorizontalAlignment="Left" Margin="741,5,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.RowSpan="2" Grid.Row="1"/>
-        <Button x:Name="addBtn8" Content="+" HorizontalAlignment="Left" Margin="741,16,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.Row="2"/>
-        <Button x:Name="addBtn1_Copy5" Content="+" HorizontalAlignment="Left" Margin="741,46,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.Row="2"/>
+        <Button x:Name="addBtn3" Content="+" HorizontalAlignment="Left" Margin="741,135,0,0" VerticalAlignment="Top" Height="26" Width="30" Click="addBtn3_Click"/>
+        <Button x:Name="addBtn4" Content="+" HorizontalAlignment="Left" Margin="741,167,0,0" VerticalAlignment="Top" Height="26" Width="30" Click="addBtn4_Click"/>
+        <Button x:Name="addBtn5" Content="+" HorizontalAlignment="Left" Margin="741,198,0,0" VerticalAlignment="Top" Height="26" Width="30" Click="addBtn5_Click"/>
+        <Button x:Name="addBtn6" Content="+" HorizontalAlignment="Left" Margin="741,230,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.RowSpan="2" Click="addBtn6_Click"/>
+        <Button x:Name="addBtn7" Content="+" HorizontalAlignment="Left" Margin="741,5,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.RowSpan="2" Grid.Row="1"  Click="addBtn7_Click"/>
+        <Button x:Name="addBtn8" Content="+" HorizontalAlignment="Left" Margin="741,16,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.Row="2"  Click="addBtn8_Click"/>
         <Button x:Name="removeBtn1" Content="-" HorizontalAlignment="Left" Margin="29,74,0,0" VerticalAlignment="Top" Height="26" Width="30" Click="removeBtn1_Click"/>
         <Button x:Name="removeBtn2" Content="-" HorizontalAlignment="Left" Margin="29,106,0,0" VerticalAlignment="Top" Height="26" Width="30"/>
         <Button x:Name="removeBtn3" Content="-" HorizontalAlignment="Left" Margin="29,137,0,0" VerticalAlignment="Top" Height="26" Width="30"/>
@@ -111,8 +106,8 @@
         <Button x:Name="removeBtn7" Content="-" HorizontalAlignment="Left" Margin="29,4,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.RowSpan="2" Grid.Row="1"/>
         <Button x:Name="removeBtn8" Content="-" HorizontalAlignment="Left" Margin="29,15,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.Row="2"/>
         <Button x:Name="removeBtn9" Content="-" HorizontalAlignment="Left" Margin="29,47,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.Row="2"/>
-        <Label x:Name="currencyName_Copy12" Content="Cart Items:" HorizontalAlignment="Left" Margin="29,18,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="cartItemsLbl" Content="0" HorizontalAlignment="Left" Margin="105,18,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="addBtn8_Copy" Content="+" HorizontalAlignment="Left" Margin="741,47,0,0" VerticalAlignment="Top" Height="26" Width="30" Grid.Row="2"  Click="addBtn9_Click"/>
 
     </Grid>
 </UserControl>
