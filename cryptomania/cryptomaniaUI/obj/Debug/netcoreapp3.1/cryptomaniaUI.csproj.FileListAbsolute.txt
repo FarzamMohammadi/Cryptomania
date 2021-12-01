@@ -148,4 +148,3 @@ C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\bin\Debug\
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\bin\Debug\netcoreapp3.1\cryptomania.dll
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\bin\Debug\netcoreapp3.1\cryptomania.pdb
-C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomaniaUI\obj\Debug\netcoreapp3.1\cryptomaniaUI.csproj.CopyComplete

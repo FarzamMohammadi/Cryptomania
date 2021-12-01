@@ -121,7 +121,7 @@ namespace cryptomaniaUI.Views
             // Set ran string length
             int length = 10;
             // Get radnom string
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-/.,-=])(*&^%$#@";
+            const string chars = "qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-/.,-=])(*&^%$#@";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
