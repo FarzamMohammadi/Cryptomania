@@ -43,7 +43,7 @@ namespace cryptomania.Controllers
         }*/
 
         // GET: api/Wallets/5
-        [HttpGet("{id}")]
+        [HttpGet("{username}")]
         public ActionResult<Wallet> GetWallet(string username)
         {
             Wallet wallet = _context.Wallets
@@ -61,23 +61,28 @@ namespace cryptomania.Controllers
         // PUT: api/Wallets/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutWallet(string id, Wallet wallet)
+        [HttpPut]
+        public async Task<IActionResult> PutWallet(Wallet passedWallet)
         {
-            if (id != wallet.Id)
+
+            var wallet = await _context.Wallets.FindAsync(passedWallet.Id);
+
+            if (wallet.Id != null)
             {
-                return BadRequest();
+                wallet.WalletAddress = passedWallet.WalletAddress;
+                _context.Entry(wallet).State = EntityState.Modified;
             }
-
-            _context.Entry(wallet).State = EntityState.Modified;
-
+            else
+            {
+                return NotFound();
+            }
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WalletExists(id))
+                if (wallet.Id == null)
                 {
                     return NotFound();
                 }
@@ -94,9 +99,21 @@ namespace cryptomania.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Wallet>> PostWallet(Wallet wallet)
+        public async Task<ActionResult<Wallet>> PostWallet(Wallet passedWallet)
         {
-            _context.Wallets.Add(wallet);
+            Wallet wallet = GetWalletByUsername(passedWallet.Username);
+
+            if (wallet.Id == null)
+            {
+                int tableRecords = GetTableCount();
+                wallet.Id = (tableRecords + 1).ToString();
+                _context.Wallets.Add(wallet);
+            }
+            else
+            {
+                return Conflict();
+            }
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -135,6 +152,21 @@ namespace cryptomania.Controllers
         private bool WalletExists(string id)
         {
             return _context.Wallets.Any(e => e.Id == id);
+        }
+
+        private int GetTableCount()
+        {
+            int count = _context.Wallets.Select(x => x.Id).Count();
+
+            return count;
+        }
+
+        private Wallet GetWalletByUsername(string Username)
+        {
+            Wallet wallet = _context.Wallets
+                   .Where(b => b.Username == Username)
+                   .FirstOrDefault();
+            return wallet;
         }
     }
 }

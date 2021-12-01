@@ -2,6 +2,7 @@
 using cryptomaniaUI.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,37 +21,60 @@ namespace cryptomaniaUI.Views
     /// </summary>
     public partial class ProfileView : UserControl
     {
+        private static Random random = new Random();
         public ProfileView()
         {
             InitializeComponent();
             // Sets username in UI
             usernameLbl.Content = SignedInModel.Username;
             // Checks for wallet, if it exists updates UI
-            CheckWallet();
+            FindUserWallet();
 
         }
 
-        private void CheckWallet()
+        private async void FindUserWallet()
         {
-            WalletModel wallet = SignedInModel.CheckForUserWallet();
+            purchases_dg.Items.Clear();
+            WalletModel wallet = WalletModel.CheckForUserWallet();
             List<PurchasedCrypto> purchasedCrypto = new List<PurchasedCrypto>();
             PurchasedCrypto pruchase = null;
             if (wallet != null)
             {
+                SignedInModel.CurrentWallet = wallet;
                 walletAddyLbl.Content = wallet.WalletAddress;
-                string[] purchases = wallet.Purchases.Split('/');
 
-                foreach(string purcahse in purchases)
+                if (wallet.Purchases != "")
                 {
-                    int length = purcahse.Length;
-                    string cryptoName = purcahse.Substring(0, 3);
-                    string cryptoQuantity = purcahse.Substring(4, length);
-                    // A cool one liner below ;)
-                    purchasedCrypto.Add(pruchase = new PurchasedCrypto() { Name = cryptoName, Quantity = cryptoQuantity });
-                }
+                    string[] purchases = wallet.Purchases.Split('/');
 
+                    foreach (string purcahse in purchases)
+                    {
+                        int length = purcahse.Length;
+                        string cryptoName = purcahse.Substring(0, 3);
+                        string cryptoQuantity = purcahse.Substring(4, length);
+                        // A cool one liner below ;)
+                        purchasedCrypto.Add(pruchase = new PurchasedCrypto() { Name = cryptoName, Quantity = cryptoQuantity });
+                    }
+                }
+               
                 // Add each purchase to datagrid
             }
+            else
+            {
+                walletAddyLbl.Content = "-- NO ADDRESS --";
+                WalletModel newWallet = new WalletModel() { Purchases = "", Username = SignedInModel.Username, WalletAddress = "" };
+                SignedInModel.CurrentWallet = newWallet;
+                bool success = await WalletModel.AddWalletAsync(newWallet);
+                if (success)
+                {
+                    MessageBox.Show("First Login. New wallet created.");
+                }
+            }
+        }
+
+        private void Refresh_btn_Click(object sender, RoutedEventArgs e)
+        {
+            FindUserWallet();
         }
 
         private void Main_btn_Click(object sender, RoutedEventArgs e)
@@ -59,13 +83,7 @@ namespace cryptomaniaUI.Views
             SignedInModel.LoggedIn = false;
             Mediator.Notify("GoToHomeView", "");
         }
-        public void GetCurrentUserWallet()
-        {
-            // Set usernameLbl as SignedInModel.Username
-            // Check db to see if wallet address exists for current user based on SignedInModel.Username
-            // If exists update walletAddyLbl 
-            // Update datagrid with user's wallet details
-        }
+     
         private void Send_btn_Click(object sender, RoutedEventArgs e)
         {
             // Get values from datagri, crypto2SendAmountTBox and receiverWalletAddressTBox and send crypto from current user to that address
@@ -83,11 +101,30 @@ namespace cryptomaniaUI.Views
             Mediator.Notify("GoToCartView", "");
         }
 
-        private void NewWallet_btn_Click(object sender, RoutedEventArgs e)
+        private async void NewWallet_btn_Click(object sender, RoutedEventArgs e)
         {
-            
+            string newWalletAddress = GetNewRandomAddress();
+            WalletModel walletToUpdate = SignedInModel.CurrentWallet;
+            walletToUpdate.WalletAddress = newWalletAddress;
+
+            bool success = await WalletModel.UpdateWithNewAddress(walletToUpdate);
+            if (success)
+            {
+                walletAddyLbl.Content = newWalletAddress;
+            }
         }
 
+
+
+        public static string GetNewRandomAddress()
+        {
+            // Set ran string length
+            int length = 10;
+            // Get radnom string
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-/.,-=])(*&^%$#@";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         private void Clear_btn_Click(object sender, RoutedEventArgs e)
         {
             // Clear crypto2SendAmountTBox and receiverWalletAddressTBox 

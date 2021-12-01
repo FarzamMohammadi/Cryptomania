@@ -95,8 +95,8 @@ namespace cryptomania.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            string num = GetTableCount();
-            user.Id = num;
+            int tableRecords = GetTableCount();
+            user.Id = (tableRecords + 1).ToString();
             _context.Users.Add(user);
             if (!UserExists(user.Username))
             {
@@ -146,11 +146,11 @@ namespace cryptomania.Controllers
             return _context.Users.Any(e => e.Username == username);
         }
 
-        private string GetTableCount()
+        private int GetTableCount()
         {
             int count = _context.Users.Select(x => x.Id).Count();
-            
-            return (count+1).ToString();
+
+            return count;
         }
     }
 }
