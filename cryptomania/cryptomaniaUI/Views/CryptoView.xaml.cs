@@ -124,9 +124,14 @@ namespace cryptomaniaUI.Views
             Mediator.Notify("GoToProfileView", "");
         }
 
-        private void MainButton_Click(object sender, RoutedEventArgs e)
+        private void ClearCart_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            SignedInModel.CurrentCart.InCart = "";
+            cartItemsLbl.Content = 0;
+        }
+        private void Cart_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.Notify("GoToCartView", "");
         }
         public void AddItemToCart(string currencyId)
         {
@@ -169,13 +174,11 @@ namespace cryptomaniaUI.Views
             {
                 string[] item = SignedInModel.CurrentCart.InCart.Split('/');
                 string currencyName = "";
-                string qty = "";
                 // Split currency name from qty 
                 for (int i = 1; i < item.Length; i++)
                 {
                     string[] cartItem = item[i].Split('-');
-                    currencyName = cartItem[0];
-                    qty = cartItem[1];                    
+                    currencyName = cartItem[0];                   
                 }
                 //If the currency to add is not the same as the existing one
                 if (currencyName != currencyId)
@@ -190,149 +193,166 @@ namespace cryptomaniaUI.Views
         }
         private void addBtn1_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[0];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[0].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
 
         private void addBtn2_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[1];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[1].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn3_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[2];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[2].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn4_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[3];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[3].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn5_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[4];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[4].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn6_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[5];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[5].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn7_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[6];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[6].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn8_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[7];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[7].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void addBtn9_Click(object sender, RoutedEventArgs e)
         {
-            CryptoModel newCrypto = new CryptoModel();
-            newCrypto = SignedInModel.Cryptos[8];
-            AddItemToCart(newCrypto.Id);
-            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count();
+            AddItemToCart(SignedInModel.Cryptos[8].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
 
+        public void RemoveItemToCart(string currencyId)
+        {
+            if (SignedInModel.CurrentCart.InCart.Length >= 10)
+            {
+                // If more than 2 cart items exist splits and adds new item accordingly
+                string[] items = SignedInModel.CurrentCart.InCart.Split('/');
+                List<string> currencyNames = new List<string>();
+                List<string> qty = new List<string>();
+                // Split currency name from qty 
+                for (int i = 1; i < items.Length; i++)
+                {
+                    string[] cartItem = items[i].Split('-');
+                    currencyNames.Add(cartItem[0]);
+                    qty.Add(cartItem[1]);
+                }
+                // If the item to add already exists in cart adds 1 to existing qty
+                if (currencyNames.Contains(currencyId))
+                {
+                    int amountOfItem = int.Parse(qty[currencyNames.IndexOf(currencyId)]);
+
+                    if (amountOfItem > 1)
+                    {
+                        qty[currencyNames.IndexOf(currencyId)] = (amountOfItem - 1).ToString();
+                    }
+                    else if (amountOfItem <= 1)
+                    {
+                        qty.RemoveAt(currencyNames.IndexOf(currencyId));
+                        currencyNames.RemoveAt(currencyNames.IndexOf(currencyId));
+                    }
+                }
+
+
+                SignedInModel.CurrentCart.InCart = "";
+                for (int i = 0; i < currencyNames.Count; i++)
+                {
+                    SignedInModel.CurrentCart.InCart = SignedInModel.CurrentCart.InCart + "/" + currencyNames[i] + "-" + qty[i];
+                }
+
+            }
+            else if (SignedInModel.CurrentCart.InCart.Length == 0) // If cart is empty
+            {
+                MessageBox.Show("You must add items first");
+            }
+            else // If cart contains only 1 item
+            {
+                string[] item = SignedInModel.CurrentCart.InCart.Split('/');
+                string currencyName = "";
+                string qty = "";
+                // Split currency name from qty 
+                for (int i = 1; i < item.Length; i++)
+                {
+                    string[] cartItem = item[i].Split('-');
+                    currencyName = cartItem[0];
+                    qty = cartItem[1];
+                }
+                if (currencyName == currencyId) // If this item is the same as the one we are trying to remove
+                {
+                    int amounOfItem = int.Parse(qty);
+                    //If the currency to add is not the same as the existing one
+                    if (amounOfItem > 1)
+                    {
+                        SignedInModel.CurrentCart.InCart = SignedInModel.CurrentCart.InCart + "/" + currencyId + "-" + (amounOfItem - 1).ToString();
+                    }
+                    else if (amounOfItem <= 1) // If it is the same then change qty to 2
+                    {
+                        SignedInModel.CurrentCart.InCart = "";
+                    }
+                }
+              
+            }
+        }
         private void removeBtn1_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[0].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[0].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn2_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[1].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[1].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn3_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[2].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[2].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn4_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[3].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[3].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn5_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[4].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[4].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn6_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[5].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[5].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn7_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[6].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[6].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn8_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[7].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[7].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
         private void removeBtn9_Click(object sender, RoutedEventArgs e)
         {
-            var item = SignedInModel.CryptosInCart.SingleOrDefault(x => x.Name == (SignedInModel.Cryptos[8].Name));
-            if (item != null)
-            {
-                SignedInModel.CryptosInCart.Remove(item);
-            }
-            cartItemsLbl.Content = SignedInModel.CryptosInCart.Count.ToString();
+            RemoveItemToCart(SignedInModel.Cryptos[8].Id);
+            cartItemsLbl.Content = SignedInModel.CurrentCart.InCart.Split('/').Count() - 1;
         }
     }
 }
