@@ -12,7 +12,9 @@ namespace cryptomaniaUI.Models
         public static bool LoggedIn { get; set; }
         public static string Username { get; set; }
         public static WalletModel CurrentWallet { get; set; }
+        public static List<CryptoModel> Cryptos { get; set; }
+        public static List<CryptoModel> CryptosInCart { get; set; }
+        public static CartModel CurrentCart { get; set; }
 
-      
     }
 }

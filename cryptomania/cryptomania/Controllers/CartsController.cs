@@ -29,10 +29,12 @@ namespace cryptomania.Controllers
         }
 
         // GET: api/Carts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Cart>> GetCart(string id)
+        [HttpGet("{username}")]
+        public ActionResult<Cart> GetCart(string username)
         {
-            var cart = await _context.Carts.FindAsync(id);
+            var cart = _context.Carts
+                     .Where(b => b.Username == username)
+                     .FirstOrDefault();
 
             if (cart == null)
             {
