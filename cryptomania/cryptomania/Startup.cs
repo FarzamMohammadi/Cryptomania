@@ -1,4 +1,5 @@
 using cryptomania.DataAccess;
+using cryptomania.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +30,7 @@ namespace cryptomania
         {
             services.AddDbContext<CryptoContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("RDS"));
+                options.UseSqlServer(ClientModel.RDSConnStr);
             });
             services.AddControllers();
         }

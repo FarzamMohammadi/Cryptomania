@@ -31,6 +31,7 @@
     ".NETCoreApp,Version=v3.1": {
       "cryptomania/1.0.0": {
         "dependencies": {
+          "AWSSDK.SimpleSystemsManagement": "3.7.11.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.21",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.21",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
@@ -309,6 +310,31 @@
         },
         "compile": {
           "cryptomania.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.7.5.3": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.5.3"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
+        }
+      },
+      "AWSSDK.SimpleSystemsManagement/3.7.11.1": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.5.3"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SimpleSystemsManagement.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.11.1"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.SimpleSystemsManagement.dll": {}
         }
       },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -3826,6 +3852,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.7.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e5EJyfTSQLzN9Re7DQyv4tlhDw5BsmUlL/d5kKwF7HKv4IFZ7XhtpQtDw46Wn2IrIstet68ZksaIYnHSBJvTjw==",
+      "path": "awssdk.core/3.7.5.3",
+      "hashPath": "awssdk.core.3.7.5.3.nupkg.sha512"
+    },
+    "AWSSDK.SimpleSystemsManagement/3.7.11.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4B0VerefS2xQ++eAoOjaa51FEPT9jjcIY3GQsOAas8qsszvO78ziF33bqq1ZxTVkqYdQ6AI/hneygNwHTw63NA==",
+      "path": "awssdk.simplesystemsmanagement/3.7.11.1",
+      "hashPath": "awssdk.simplesystemsmanagement.3.7.11.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
       "type": "package",

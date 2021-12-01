@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Q3PMi9xceRGAnRaiZdahw66dOoDNSuLrI8OWhseLoQLspqmIUgXs6Gp5L+afMmZvmVi1MobWBBRl9QSfpcX6wg==",
+  "dgSpecHash": "g9VbsgFw+zpngHOYDFtghuOVPUsibIaY1m1bxLTLXzhJdtmM+PBDyjOEPg2+c2q7D/W3y0b1BrAeerXinXKVYQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\farza\\Desktop\\Projects\\cryptomania\\cryptomania\\cryptomaniaUI\\cryptomaniaUI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\farza\\.nuget\\packages\\awssdk.core\\3.7.5.3\\awssdk.core.3.7.5.3.nupkg.sha512",
+    "C:\\Users\\farza\\.nuget\\packages\\awssdk.simplesystemsmanagement\\3.7.11.1\\awssdk.simplesystemsmanagement.3.7.11.1.nupkg.sha512",
     "C:\\Users\\farza\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\farza\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\farza\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",

@@ -131,3 +131,5 @@ C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomania\bin\Debug\ne
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomania\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomania\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomania\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomania\bin\Debug\netcoreapp3.1\AWSSDK.Core.dll
+C:\Users\farza\Desktop\Projects\cryptomania\cryptomania\cryptomania\bin\Debug\netcoreapp3.1\AWSSDK.SimpleSystemsManagement.dll
