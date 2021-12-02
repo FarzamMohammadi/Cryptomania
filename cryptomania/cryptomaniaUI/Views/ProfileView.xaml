@@ -16,7 +16,12 @@
         <Label x:Name="walletAddyLbl" Content="-" HorizontalAlignment="Left" Margin="133,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Hi," HorizontalAlignment="Left" Margin="42,19,0,0" VerticalAlignment="Top"/>
         <Label x:Name="usernameLbl" Content="-" HorizontalAlignment="Left" Margin="66,19,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="purchases_dg" Margin="42,81,364,147"/>
+        <DataGrid x:Name="ProfileDataGrid" Margin="42,81,364,147">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="CRYPTOCURRENCY" Binding="{Binding CurrencyName}" Width="250"/>
+                <DataGridTextColumn Header="QTY" Binding="{Binding CurrencyQuantity}"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Refresh Wallet" HorizontalAlignment="Left" Margin="306,54,0,0" VerticalAlignment="Top" Click="Refresh_btn_Click" Height="22" Width="130"/>
         <Label Content="To send currency please follow the steps below:" HorizontalAlignment="Left" Margin="449,79,0,0" VerticalAlignment="Top"/>
         <Label Content="1. Select currency from grid" HorizontalAlignment="Left" Margin="449,105,0,0" VerticalAlignment="Top"/>

@@ -35,12 +35,11 @@ namespace cryptomaniaUI.Models
                 if(returnedCart.Id != null) {
                     SignedInModel.CurrentCart = returnedCart;
                 }
-
             }
             catch
             {
                 SignedInModel.CurrentCart = null;
-                await CreateNewCart();
+                _ = await CreateNewCart();
             }
         }
         public static async Task<bool> CreateNewCart()
@@ -68,6 +67,34 @@ namespace cryptomaniaUI.Models
             {
                 CheckCart();
                 MessageBox.Show("Issue creating cart.");
+                return false;
+            }
+        }
+        public async static Task<bool> AddCurrentCart()
+        {
+            CartModel cart = SignedInModel.CurrentCart;
+            try
+            {
+                // Post new user data to api 
+                var json = JsonConvert.SerializeObject(cart);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var url = "https://localhost:5001/api/carts";
+                using var client = new HttpClient();
+                var response = await client.PutAsync(url, data);
+                string result = response.Content.ReadAsStringAsync().Result;
+
+                // If already exits or any other false code the return the msg below
+                if (response.ReasonPhrase == "Conflict")
+                {
+                    MessageBox.Show("Issue saving your cart.");
+                    return false;
+                }
+                return true;
+            }
+            catch
+            {
+                CheckCart();
+                MessageBox.Show("Issue saving your cart.");
                 return false;
             }
         }

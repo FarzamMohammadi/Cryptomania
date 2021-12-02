@@ -34,10 +34,11 @@ namespace cryptomaniaUI.Views
 
         private async void FindUserWallet()
         {
-            purchases_dg.Items.Clear();
+            ProfileDataGrid.Items.Clear();
             WalletModel wallet = WalletModel.CheckForUserWallet();
-            List<PurchasedCrypto> purchasedCrypto = new List<PurchasedCrypto>();
-            PurchasedCrypto pruchase = null;
+            List<CartDGModel> purchasedCrypto = new List<CartDGModel>();
+            CartDGModel pruchase = null;
+
             if (wallet != null)
             {
                 SignedInModel.CurrentWallet = wallet;
@@ -47,17 +48,18 @@ namespace cryptomaniaUI.Views
                 {
                     string[] purchases = wallet.Purchases.Split('/');
 
-                    foreach (string purcahse in purchases)
+                    for (int i = 1; i < purchases.Length; i++)
                     {
-                        int length = purcahse.Length;
-                        string cryptoName = purcahse.Substring(0, 3);
-                        string cryptoQuantity = purcahse.Substring(4, length);
+                        string[] cartItem = purchases[i].Split('-');
+                        pruchase = new CartDGModel() { CurrencyName = cartItem[0], CurrencyQuantity = cartItem[1] };
                         // A cool one liner below ;)
-                        purchasedCrypto.Add(pruchase = new PurchasedCrypto() { Name = cryptoName, Quantity = cryptoQuantity });
+                        purchasedCrypto.Add(pruchase);
                     }
                 }
-               
-                // Add each purchase to datagrid
+                foreach (CartDGModel datagridItem in purchasedCrypto)
+                {
+                    ProfileDataGrid.Items.Add(datagridItem);
+                }
             }
             else
             {
@@ -107,7 +109,7 @@ namespace cryptomaniaUI.Views
             WalletModel walletToUpdate = SignedInModel.CurrentWallet;
             walletToUpdate.WalletAddress = newWalletAddress;
 
-            bool success = await WalletModel.UpdateWithNewAddress(walletToUpdate);
+            bool success = await WalletModel.UpdateWallet(walletToUpdate);
             if (success)
             {
                 walletAddyLbl.Content = newWalletAddress;
@@ -119,7 +121,7 @@ namespace cryptomaniaUI.Views
         public static string GetNewRandomAddress()
         {
             // Set ran string length
-            int length = 10;
+            int length = 18;
             // Get radnom string
             const string chars = "qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-/.,-=])(*&^%$#@";
             return new string(Enumerable.Repeat(chars, length)

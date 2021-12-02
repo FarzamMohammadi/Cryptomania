@@ -121,9 +121,14 @@ namespace cryptomaniaUI.Views
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)
         {
+            SaveCart();
             Mediator.Notify("GoToProfileView", "");
         }
 
+        public async void SaveCart()
+        {
+            _ = await CartModel.AddCurrentCart();
+        }
         private void ClearCart_btn_Click(object sender, RoutedEventArgs e)
         {
             SignedInModel.CurrentCart.InCart = "";
@@ -131,6 +136,7 @@ namespace cryptomaniaUI.Views
         }
         private void Cart_btn_Click(object sender, RoutedEventArgs e)
         {
+            SaveCart();
             Mediator.Notify("GoToCartView", "");
         }
         public void AddItemToCart(string currencyId)

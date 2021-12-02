@@ -70,7 +70,7 @@ namespace cryptomaniaUI.Models
                 return false;
             }
         }
-        public async static Task<bool> UpdateWithNewAddress(WalletModel walletToUpdate)
+        public async static Task<bool> UpdateWallet(WalletModel walletToUpdate)
         {
             try
             {
@@ -83,15 +83,15 @@ namespace cryptomaniaUI.Models
                 // If already exits or any other false code the return the msg below
                 if (response.ReasonPhrase == "Conflict")
                 {
-                    MessageBox.Show("Could not update wallet address.");
+                    MessageBox.Show("Could not update wallet.");
                     return false;
                 }
+                MessageBox.Show("Wallet Updated.");
                 return true;
             }
             catch
             {
-                MessageBox.Show("Could not update wallet address.");
-
+                MessageBox.Show("Could not update wallet.");
                 return false;
             }
         }

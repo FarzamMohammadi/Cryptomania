@@ -65,12 +65,9 @@ namespace cryptomania.Controllers
         public async Task<IActionResult> PutWallet(Wallet passedWallet)
         {
 
-            var wallet = await _context.Wallets.FindAsync(passedWallet.Id);
-
-            if (wallet.Id != null)
+            if (passedWallet.Id != null)
             {
-                wallet.WalletAddress = passedWallet.WalletAddress;
-                _context.Entry(wallet).State = EntityState.Modified;
+                _context.Entry(passedWallet).State = EntityState.Modified;
             }
             else
             {
@@ -82,7 +79,7 @@ namespace cryptomania.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (wallet.Id == null)
+                if (passedWallet.Id == null)
                 {
                     return NotFound();
                 }

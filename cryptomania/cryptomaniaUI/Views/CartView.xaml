@@ -7,13 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-        <Label Content="Cart" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top" FontSize="20" FontStyle="Italic"/>
-        <DataGrid Margin="37,65,376,85"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="456,96,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="582,96,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
-        <Button Content="Clear Cart" HorizontalAlignment="Left" Margin="456,146,0,0" VerticalAlignment="Top" Height="34" Width="76"/>
+        <Label Content="Cart" HorizontalAlignment="Left" Margin="390,10,0,0" VerticalAlignment="Top" FontSize="20" FontStyle="Italic"/>
+        <DataGrid x:Name="CartDataGrid" Margin="37,65,376,85" FontSize="15">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="CRYPTOCURRENCY" Binding="{Binding CurrencyName}" Width="250"/>
+                <DataGridTextColumn Header="QTY" Binding="{Binding CurrencyQuantity}"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="+" HorizontalAlignment="Left" Margin="456,96,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="Add_btn_Click"/>
+        <Button Content="-" HorizontalAlignment="Left" Margin="632,96,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="Subtract_btn_Click"/>
+        <Button Content="Clear Cart" HorizontalAlignment="Left" Margin="456,146,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="ClearCart_btn_Click"/>
         <Label Content="To modify first select the currency on the grid." HorizontalAlignment="Left" Margin="456,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.446,0.99"/>
-        <Button Content="Back to main " HorizontalAlignment="Left" Margin="456,331,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="Button_Click"/>
+        <Button Content="Back to main " HorizontalAlignment="Left" Margin="456,331,0,0" VerticalAlignment="Top" Height="34" Width="76" Click="Back_btn_Click"/>
+        <Button Content="Buy" HorizontalAlignment="Left" Margin="566,289,0,0" VerticalAlignment="Top" Height="75" Width="142" Click="Buy_btn_Click"/>
 
     </Grid>
 </UserControl>

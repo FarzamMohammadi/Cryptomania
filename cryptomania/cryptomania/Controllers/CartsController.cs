@@ -47,10 +47,10 @@ namespace cryptomania.Controllers
         // PUT: api/Carts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCart(string id, Cart cart)
+        [HttpPut]
+        public async Task<IActionResult> PutCart(Cart cart)
         {
-            if (id != cart.Id)
+            if (cart.Id == null || cart.Id == "")
             {
                 return BadRequest();
             }
@@ -63,7 +63,7 @@ namespace cryptomania.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CartExists(id))
+                if (!CartExists(cart.Id))
                 {
                     return NotFound();
                 }
