@@ -10,8 +10,8 @@ namespace cryptomania.Models
 {
     public class ClientModel
     {
-        private static string AccessKeyID = "AKIAW6YHDHANOHPKQLD2";
-        private static string SecretKey = "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";
+        private static string AccessKeyID = "AKIAW6YHDHANHYHPI64K";
+        private static string SecretKey = "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";
         public static RegionEndpoint Region = RegionEndpoint.GetBySystemName("ca-central-1");
         public static string RDSConnStr = GetConnStr("/Client/RDSConnStr").Result;
 
